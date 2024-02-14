@@ -44,10 +44,10 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: creatures; Type: TABLE; Schema: public; Owner: freecodecamp
+-- Name: creature; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
-CREATE TABLE public.creatures (
+CREATE TABLE public.creature (
     creature_id integer NOT NULL,
     name character varying(30) NOT NULL,
     descriptions text,
@@ -56,7 +56,7 @@ CREATE TABLE public.creatures (
 );
 
 
-ALTER TABLE public.creatures OWNER TO freecodecamp;
+ALTER TABLE public.creature OWNER TO freecodecamp;
 
 --
 -- Name: creatures_creature_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
@@ -77,7 +77,7 @@ ALTER TABLE public.creatures_creature_id_seq OWNER TO freecodecamp;
 -- Name: creatures_creature_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: freecodecamp
 --
 
-ALTER SEQUENCE public.creatures_creature_id_seq OWNED BY public.creatures.creature_id;
+ALTER SEQUENCE public.creatures_creature_id_seq OWNED BY public.creature.creature_id;
 
 
 --
@@ -244,10 +244,10 @@ ALTER SEQUENCE public.star_star_id_seq OWNED BY public.star.star_id;
 
 
 --
--- Name: creatures creature_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
+-- Name: creature creature_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
 --
 
-ALTER TABLE ONLY public.creatures ALTER COLUMN creature_id SET DEFAULT nextval('public.creatures_creature_id_seq'::regclass);
+ALTER TABLE ONLY public.creature ALTER COLUMN creature_id SET DEFAULT nextval('public.creatures_creature_id_seq'::regclass);
 
 
 --
@@ -279,9 +279,12 @@ ALTER TABLE ONLY public.star ALTER COLUMN star_id SET DEFAULT nextval('public.st
 
 
 --
--- Data for Name: creatures; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+-- Data for Name: creature; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.creature VALUES (1, 'Human', 'Human being', 10, false);
+INSERT INTO public.creature VALUES (2, 'Orc', 'Orc Beast', 11, true);
+INSERT INTO public.creature VALUES (3, 'Forest Elves', 'Forest Elves', 12, false);
 
 
 --
@@ -356,7 +359,7 @@ INSERT INTO public.star VALUES (6, 'Vega', 1, 23, 12.12, 'Named for Johann Elert
 -- Name: creatures_creature_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.creatures_creature_id_seq', 1, false);
+SELECT pg_catalog.setval('public.creatures_creature_id_seq', 3, true);
 
 
 --
@@ -388,18 +391,18 @@ SELECT pg_catalog.setval('public.star_star_id_seq', 6, true);
 
 
 --
--- Name: creatures creatures_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: creature creatures_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
-ALTER TABLE ONLY public.creatures
+ALTER TABLE ONLY public.creature
     ADD CONSTRAINT creatures_name_key UNIQUE (name);
 
 
 --
--- Name: creatures creatures_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: creature creatures_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
-ALTER TABLE ONLY public.creatures
+ALTER TABLE ONLY public.creature
     ADD CONSTRAINT creatures_pkey PRIMARY KEY (creature_id);
 
 
@@ -468,10 +471,10 @@ ALTER TABLE ONLY public.star
 
 
 --
--- Name: creatures fk_creatures_planet; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: creature fk_creatures_planet; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
-ALTER TABLE ONLY public.creatures
+ALTER TABLE ONLY public.creature
     ADD CONSTRAINT fk_creatures_planet FOREIGN KEY (planet_id) REFERENCES public.planet(planet_id);
 
 
